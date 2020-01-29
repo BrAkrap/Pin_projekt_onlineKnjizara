@@ -27,16 +27,17 @@ namespace Pin_projekt_onlineKnjizara.Controllers
             if (!String.IsNullOrEmpty(autor))
             {
                 var naslovi = _context.Knjige.Where(k => k.Autor.Prezime == autor);
-                return View(await naslovi.OrderBy(k => k.Naslov).ToListAsync());
+                return View(await naslovi.OrderBy(k => k.Kolicina).ToListAsync());
             }
             if (!String.IsNullOrEmpty(search))
             {
                 var naslovi = _context.Knjige.Where(k => k.Naslov.Contains(search) ||
                                                     k.Autor.Ime.Contains(search) ||
                                                     k.Autor.Prezime.Contains(search));
-                return View(await naslovi.OrderBy(k => k.Naslov).ToListAsync());
+                return View(await naslovi.OrderBy(k => k.Kolicina).ToListAsync());
             }
-            return View(await pin_projekt_onlineKnjizaraContext.OrderBy(k => k.Naslov).ToListAsync());
+            
+            return View(await pin_projekt_onlineKnjizaraContext.OrderBy(k => k.Kolicina).ToListAsync());
         }
 
         // GET: Knjige/Details/5
@@ -104,7 +105,7 @@ namespace Pin_projekt_onlineKnjizara.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naslov,AutorId,Cijena")] Knjiga knjiga)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naslov,AutorId,Cijena,Kolicina")] Knjiga knjiga)
         {
             if (id != knjiga.Id)
             {

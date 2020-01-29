@@ -3,19 +3,35 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pin_projekt_onlineKnjizara.Migrations
 {
-    public partial class AddKosarica : Migration
+    public partial class Kolicina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Kosarice");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Kolicina",
+                table: "Knjige",
+                nullable: false,
+                defaultValue: 0);
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Kolicina",
+                table: "Knjige");
+
             migrationBuilder.CreateTable(
                 name: "Kosarice",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    KosaricaId = table.Column<string>(nullable: true),
                     KnjigaId = table.Column<int>(nullable: false),
-                    Kolicina = table.Column<int>(nullable: false)
+                    Kolicina = table.Column<int>(nullable: false),
+                    KosaricaId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,12 +48,6 @@ namespace Pin_projekt_onlineKnjizara.Migrations
                 name: "IX_Kosarice_KnjigaId",
                 table: "Kosarice",
                 column: "KnjigaId");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "Kosarice");
         }
     }
 }

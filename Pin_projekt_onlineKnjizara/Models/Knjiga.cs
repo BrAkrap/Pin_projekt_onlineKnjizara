@@ -13,5 +13,7 @@ namespace Pin_projekt_onlineKnjizara.Models
         public virtual Autor Autor { get; set; }
         public int AutorId { get; set; }
         public decimal Cijena { get; set; }
+        [Display(Name = "Na skladištu")]
+        public int Kolicina { get; set; }
     }
 }

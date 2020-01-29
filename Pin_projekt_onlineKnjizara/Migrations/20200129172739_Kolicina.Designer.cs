@@ -9,8 +9,8 @@ using Pin_projekt_onlineKnjizara.Data;
 namespace Pin_projekt_onlineKnjizara.Migrations
 {
     [DbContext(typeof(Pin_projekt_onlineKnjizaraContext))]
-    [Migration("20200126190054_AddKosarica")]
-    partial class AddKosarica
+    [Migration("20200129172739_Kolicina")]
+    partial class Kolicina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,8 @@ namespace Pin_projekt_onlineKnjizara.Migrations
 
                     b.Property<decimal>("Cijena");
 
+                    b.Property<int>("Kolicina");
+
                     b.Property<string>("Naslov");
 
                     b.HasKey("Id");
@@ -54,38 +56,11 @@ namespace Pin_projekt_onlineKnjizara.Migrations
                     b.ToTable("Knjige");
                 });
 
-            modelBuilder.Entity("Pin_projekt_onlineKnjizara.Models.Kosarica", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("KnjigaId");
-
-                    b.Property<int>("Kolicina");
-
-                    b.Property<string>("KosaricaId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KnjigaId");
-
-                    b.ToTable("Kosarice");
-                });
-
             modelBuilder.Entity("Pin_projekt_onlineKnjizara.Models.Knjiga", b =>
                 {
                     b.HasOne("Pin_projekt_onlineKnjizara.Models.Autor", "Autor")
                         .WithMany("Knjige")
                         .HasForeignKey("AutorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Pin_projekt_onlineKnjizara.Models.Kosarica", b =>
-                {
-                    b.HasOne("Pin_projekt_onlineKnjizara.Models.Knjiga", "Knjiga")
-                        .WithMany()
-                        .HasForeignKey("KnjigaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

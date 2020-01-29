@@ -19,6 +19,6 @@ namespace Pin_projekt_onlineKnjizara.Data
 
         public DbSet<Knjiga> Knjige { get; set; }
         public DbSet<Autor> Autori { get; set; }
-        public DbSet<Kosarica> Kosarice { get; set; }
+        
     }
 }
